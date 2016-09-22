@@ -1,0 +1,133 @@
+<!--
+  Copyright 2013,2015 IBM Corp.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<script type="text/x-red" data-template-name="sysmessage">
+    <div class="form-row">
+        <label for="node-input-command"><i class="fa fa-dot-circle-o"></i> <span data-i18n="debug.to"></span></label>
+        <select type="text" id="node-input-command" style="display: inline-block; width: 250px; vertical-align: top;">
+            <option value="osxalert">OSX Alert</option>
+            <option value="osxnotification">OSX Notification</option>
+            <option value="osxmessage">OSX Message/iMessage</option>
+            <option value="winalert">WIN Alert</option>
+            <option value="winnotification">WIN Notification</option>
+        </select>
+    </div>
+
+
+
+    <div class="form-row">
+        <label for="node-input-title"><i class="fa fa-commenting"></i> <span>Title</span></label>
+        <input type="text" id="node-input-title" value="Title">
+    </div>
+    <div class="form-row">
+        <label for="node-input-subtitle"><i class="fa fa-comment"></i> <span>Subtitle</span></label>
+        <input type="text" id="node-input-subtitle" value="Subtitle">
+    </div>
+    
+    <div class="form-row">
+        <label data-i18n="trigger.send" for="node-input-op1"><i class="fa fa-comments"></i> <span data-i18n="trigger.send"></span></label>
+        <input type="hidden" id="node-input-op1type">
+        <input style="width: 70%" type="text" id="node-input-op1">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-receiver"><i class="fa fa-bullseye"></i> <span>Receiver</span></label>
+        <input type="text" id="node-input-receiver" value="Receiver">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="common.label.name"></span></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]common.label.name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="sysmessage">
+    <p>Shows a message at the host system (OSX, Windows).</p>
+    <p><br/></p>
+    <p>If no receiver is set, it uses the current host system (not a remote) to show the message.</p>
+    <p><br/></p>
+    <p>
+        Nodes `to`:
+        <ul>
+            <li>OSX Alert
+                <ul>
+                <li>A basic OS message box</li></ul>
+            </li>
+            <li>OSX Notification
+                <ul>
+                <li>Right hand notification banner, will also be added to the notification center</li></ul>
+            </li>
+            <li>OSX Message / iMessage
+                <ul>
+                <li>sends messages through the messages.app to any buddy in your list, including iMessages (Hint: add yourself to send to)</li></ul>
+            </li>
+            <li>WIN Alert
+                <ul>
+                <li>A basic OS message box, at least Win 7</li></ul>
+            </li>
+            <li>WIN Notification (will not be added to the notification center)
+                <ul>
+                <li>requires POWERSHELL to be available - means at least Win 8 (or earlier with powershell manually installed)</li>
+                <li>does not support a receiver.</li>
+                </ul>
+            </li>
+        </ul>
+    </p>
+
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('sysmessage',{
+        category: 'system',
+        color:"darksalmon",
+        defaults: {
+            command: {value:"",required:true},
+            title: {value:""},
+            subtitle: {value:""},
+            op1: {value:""},
+            op1type: {value:"val"},
+            receiver: {value:""},
+            name: {value:""}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "comment.png",
+        align: "right",
+        label: function() {
+            return this.name||this.command;
+        },
+        labelStyle: function() {
+            return this.name?"node_label_italic":"";
+        },
+        oneditprepare: function() {
+            if (this.op1type === 'val') {
+                $("#node-input-op1type").val('str');
+            }
+            var optionNothing = {value:"nul",label:this._("trigger.output.nothing"),hasValue:false};
+            var optionPayload = {value:"pay",label:this._("trigger.output.existing"),hasValue:false}
+            $("#node-input-op1").typedInput({
+                default: 'str',
+                typeField: $("#node-input-op1type"),
+                types:['str',
+                    optionPayload,
+                    optionNothing
+                ]
+            });
+
+        }
+
+    });
+</script>

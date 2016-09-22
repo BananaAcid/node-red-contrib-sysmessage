@@ -1,0 +1,37 @@
+{
+    "name": "node-red-sysmessage",
+    "version": "1.0.0",
+    "author": "Nabil Redmann <repo@bananaacid.de>",
+    "description": "A message/alert (osx/win) for Node-RED",
+    "keywords": [
+        "node-red",
+        "cli",
+        "osx",
+        "win",
+        "alert",
+        "system",
+        "nodes"
+    ],
+    "main": "none",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "contributors": [
+    ],
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/BananaAcid/node-red-sysmessage.git"
+    },
+    "homepage": "https://github.com/BananaAcid/node-red-sysmessage",
+    "node-red": {
+        "version": ">=0.14.0",
+        "nodes": {
+            "sysmessage": "nodes/sysmessage.js",
+        }
+    },
+    "dependencies": {
+    },
+    "devDependencies": {
+    }
+}
