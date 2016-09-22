@@ -9,8 +9,12 @@
         "osx",
         "win",
         "alert",
+        "notification",
         "system",
-        "nodes"
+        "nodes",
+        "say",
+        "speak",
+        "TTS"
     ],
     "main": "none",
     "scripts": {
