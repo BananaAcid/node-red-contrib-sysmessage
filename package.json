@@ -27,7 +27,7 @@
     "node-red": {
         "version": ">=0.14.0",
         "nodes": {
-            "sysmessage": "nodes/sysmessage.js",
+            "sysmessage": "nodes/sysmessage.js"
         }
     },
     "dependencies": {
