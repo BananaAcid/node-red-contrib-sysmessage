@@ -1,8 +1,8 @@
-# node-red-sysmessage
+# node-red-contrib-sysmessage
 
 This module provides a node for Node-RED to quickly show a message at the host system (OSX, Windows).
 
-It is distributed on NPM [node-red-sysmessage](https://www.npmjs.com/package/node-red-sysmessage).
+It is distributed on NPM [node-red-contrib-sysmessage](https://www.npmjs.com/package/node-red-contrib-sysmessage).
 
 ## Pre-requisites
 
@@ -13,7 +13,7 @@ This requires Node-RED version 0.14 or more recent.
 Run the following command in your Node-RED user directory (typically `~/.node-red`):
 
 ```
-npm install node-red-sysmessage
+npm install node-red-contrib-sysmessage
 ```
 
 Open your Node-RED instance and you should have the node available in the palette and a new `system` tab in right side panel.

@@ -1,5 +1,5 @@
 {
-    "name": "node-red-sysmessage",
+    "name": "node-red-contrib-sysmessage",
     "version": "1.0.0",
     "author": "Nabil Redmann <repo@bananaacid.de>",
     "description": "A message/alert (osx/win) for Node-RED",
@@ -21,9 +21,9 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "git://github.com/BananaAcid/node-red-sysmessage.git"
+        "url": "git://github.com/BananaAcid/node-red-contrib-sysmessage.git"
     },
-    "homepage": "https://github.com/BananaAcid/node-red-sysmessage",
+    "homepage": "https://github.com/BananaAcid/node-red-contrib-sysmessage",
     "node-red": {
         "version": ">=0.14.0",
         "nodes": {
