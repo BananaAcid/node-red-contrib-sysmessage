@@ -100,6 +100,21 @@ module.exports = function(RED) {
                     }
 
 
+                    case 'osxsay': {
+                        let modPayload = payload.replace(/"/g, "").replace(/'/g, "");
+                        let modTitle = node.title.replace(/"/g, "").replace(/'/g, "");
+                        let modSubtitle = node.subtitle.replace(/"/g, "").replace(/'/g, "");
+
+                        if (node.receiver.length) {
+                            cl += `of machine "eppc://${node.receiver}" `;
+                        }
+
+                        cl  = `tell application "System Events" ${cl} to say "${modTitle}, ${modSubtitle}, ${modPayload}"`.replace(/,+/, ','); // every second would be spoken
+                        cl  = `osascript -e '${cl}'`;
+
+                        break;
+                    }
+
 
                     case 'winalert': {
                         let receiver = node.receiver || process.env.USERNAME; //'%username%';
@@ -111,6 +126,15 @@ module.exports = function(RED) {
                         break;
                     }
 
+                    case 'winalertlocal': {
+                        let modPayload = payload.replace(/"/g, "'").replace(/\\n/g, '""+vbNewLine+""');
+                        let modTitle = node.title.replace(/"/g, "'");
+                        let modSubtitle = node.subtitle.replace(/\\n/g, ' ').replace(/"/g, "'");
+
+                        cl = `mshta vbscript:Execute("MsgBox(""${modPayload}"",0,""${modTitle} - ${modSubtitle}"")(window.close)")`;
+                        break;
+                    }
+
                     case 'winnotification': {
                         let modTitle = node.title + (node.subtitle ? ' - ' + node.subtitle : '');
                         modTitle = modTitle.replace(/'/g, "`");
@@ -119,6 +143,27 @@ module.exports = function(RED) {
 
                         cl = `PowerShell -EncodedCommand ${c}`;
                     }
+
+                    case 'winsay': {
+                        let modPayload = payload.replace(/"/g, "").replace(/'/g, "");
+                        let modTitle = node.title.replace(/"/g, "").replace(/'/g, "");
+                        let modSubtitle = node.subtitle.replace(/"/g, "").replace(/'/g, "");
+
+                        let c = Buffer.from(`Add-Type –AssemblyName System.Speech; (New-Object System.Speech.Synthesis.SpeechSynthesizer).Speak('${modTitle}, ${modSubtitle}, ${modPayload}');`.replace(/,+/, ','), 'utf16le').toString('base64');
+                        cl = `PowerShell -EncodedCommand ${c}`;
+                        break;
+                    }
+
+                    case 'winsay2': {
+                        let modPayload = payload.replace(/"/g, "").replace(/'/g, "");
+                        let modTitle = node.title.replace(/"/g, "").replace(/'/g, "");
+                        let modSubtitle = node.subtitle.replace(/"/g, "").replace(/'/g, "");
+
+                        // PowerShell -Command "Add-Type –AssemblyName System.Speech; (New-Object System.Speech.Synthesis.SpeechSynthesizer).Speak('${modTitle}, ${modSubtitle}, ${modPayload}');"
+                        cl = `mshta vbscript:Execute("CreateObject(""SAPI.SpVoice"").Speak(""${modTitle}, ${modSubtitle}, ${modPayload}"")(window.close)")`.replace(/,+/, ',');
+                        break;
+                    }
+                    
                 }
 
                 ///console.log( require('util').inspect( ['p', this.op1, this.op1type, process.cwd(), __dirname] ) );

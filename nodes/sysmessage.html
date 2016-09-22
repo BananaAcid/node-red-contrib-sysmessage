@@ -21,24 +21,27 @@
             <option value="osxalert">OSX Alert</option>
             <option value="osxnotification">OSX Notification</option>
             <option value="osxmessage">OSX Message/iMessage</option>
+            <option value="osxsay">OSX Say</option>
             <option value="winalert">WIN Alert</option>
+            <option value="winalertlocal">WIN Alert (mshta)</option>
             <option value="winnotification">WIN Notification</option>
+            <option value="winsay">WIN Say</option>
+            <option value="winsay2">WIN Say (mshta)</option>
         </select>
     </div>
-
-
 
     <div class="form-row">
         <label for="node-input-title"><i class="fa fa-commenting"></i> <span>Title</span></label>
         <input type="text" id="node-input-title" value="Title">
     </div>
+    
     <div class="form-row">
         <label for="node-input-subtitle"><i class="fa fa-comment"></i> <span>Subtitle</span></label>
         <input type="text" id="node-input-subtitle" value="Subtitle">
     </div>
     
     <div class="form-row">
-        <label data-i18n="trigger.send" for="node-input-op1"><i class="fa fa-comments"></i> <span data-i18n="trigger.send"></span></label>
+        <label for="node-input-op1"><i class="fa fa-comments"></i> <span>Message</span></label>
         <input type="hidden" id="node-input-op1type">
         <input style="width: 70%" type="text" id="node-input-op1">
     </div>
@@ -55,7 +58,7 @@
 </script>
 
 <script type="text/x-red" data-help-name="sysmessage">
-    <p>Shows a message at the host system (OSX, Windows).</p>
+    <p>Shows or speaks a message at the host system (OSX, Windows).</p>
     <p><br/></p>
     <p>If no receiver is set, it uses the current host system (not a remote) to show the message.</p>
     <p><br/></p>
@@ -64,27 +67,59 @@
         <ul>
             <li>OSX Alert
                 <ul>
-                <li>A basic OS message box</li></ul>
+                <li>A basic OS message box.</li></ul>
             </li>
             <li>OSX Notification
                 <ul>
-                <li>Right hand notification banner, will also be added to the notification center</li></ul>
+                <li>Right hand notification banner, will also be added to the notification center.</li></ul>
             </li>
             <li>OSX Message / iMessage
                 <ul>
-                <li>sends messages through the messages.app to any buddy in your list, including iMessages (Hint: add yourself to send to)</li></ul>
+                <li>Sends messages through the messages.app to any buddy in your list, including iMessages (Hint: add yourself to send to)</li></ul>
+            </li>
+            <li>OSX Say
+                <ul>
+                <li>Uses OSX own speech synthesis to speak the provided input.</li></ul>
             </li>
             <li>WIN Alert
                 <ul>
-                <li>A basic OS message box, at least Win 7</li></ul>
+                <li>A basic OS message box (all fields will be parsed in the message area without newlines, but supports a receiver), at least Win 7</li></ul>
             </li>
-            <li>WIN Notification (will not be added to the notification center)
+            <li>WIN Alert (mshta)
                 <ul>
-                <li>requires POWERSHELL to be available - means at least Win 8 (or earlier with powershell manually installed)</li>
-                <li>does not support a receiver.</li>
+                <li>A basic OS message box (title is shown correctly as well as newlines). At least Win XP.</li>
+                <li>Does not support a receiver.</li>
+                </ul>
+            </li>
+            <li>WIN Notification
+                <ul>
+                <li>Requires POWERSHELL to be available - means at least Win 8 (or earlier with POWERSHELL manually installed)</li>
+                <li>Will not be added to the notification center.</li>
+                <li>Does not support a receiver.</li>
+                </ul>
+            </li>
+            <li>WIN Say
+                <ul>
+                <li>Uses WIN own speech synthesis to speak the provided input, using POWERSHELL.</li>
+                <li>Does not support a receiver.</li>
+                </ul>
+            </li>
+            <li>WIN Say (mshta)
+                <ul>
+                <li>Uses WIN own speech synthesis to speak the provided input, using mshta without POWERSHELL (for older windows).</li>
+                <li>Starts the speach faster.</li>
+                <li>! Focus from the current window, is taken on the host, while mshta creates a window + speaks + closes it.</li>
+                <li>Does not support a receiver.</li>
                 </ul>
             </li>
         </ul>
+    </p>
+    <p><br/></p>
+    <p>
+        Some commands support a receiver, usually a target machines name with the same OS. <br />
+        Except for OSX Message / iMessage, here its the buddy / phonenumber or email.<br />
+        To show a message on a different OS, send the payload with an TCP OUT server, and receive it there with an TCP IN to pass it into sysmessage 
+        (<a href="https://github.com/BananaAcid/node-red-contrib-sysmessage#example-flow" target="_blank">example here</a>).
     </p>
 
 </script>
@@ -98,7 +133,7 @@
             title: {value:""},
             subtitle: {value:""},
             op1: {value:""},
-            op1type: {value:"val"},
+            op1type: {value:"pay"},
             receiver: {value:""},
             name: {value:""}
         },
