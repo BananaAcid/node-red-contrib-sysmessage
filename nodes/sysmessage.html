@@ -44,8 +44,8 @@
     </div>
 
     <div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="common.label.name"></span></label>
-        <input type="text" id="node-input-name" data-i18n="[placeholder]common.label.name">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="node-red:common.label.name"></span></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]node-red:common.label.name">
     </div>
 </script>
 
@@ -164,8 +164,8 @@
             if (this.op1type === 'val') {
                 $("#node-input-op1type").val('str');
             }
-            var optionNothing = {value:"nul",label:this._("trigger.output.nothing"),hasValue:false};
-            var optionPayload = {value:"pay",label:this._("trigger.output.existing"),hasValue:false}
+            var optionNothing = {value:"nul",label:this._("node-red:trigger.output.nothing"),hasValue:false};
+            var optionPayload = {value:"pay",label:this._("node-red:trigger.output.existing"),hasValue:false}
             $("#node-input-op1").typedInput({
                 default: 'str',
                 typeField: $("#node-input-op1type"),
