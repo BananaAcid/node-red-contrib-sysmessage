@@ -163,7 +163,40 @@ module.exports = function(RED) {
                         cl = `mshta vbscript:Execute("CreateObject(""SAPI.SpVoice"").Speak(""${modTitle}, ${modSubtitle}, ${modPayload}"")(window.close)")`.replace(/,+/, ',');
                         break;
                     }
-                    
+
+
+                    case 'linuxsay_festival': {
+                        let modPayload = payload.replace(/"/g, "").replace(/'/g, "");
+                        let modTitle = node.title.replace(/"/g, "").replace(/'/g, "");
+                        let modSubtitle = node.subtitle.replace(/"/g, "").replace(/'/g, "");
+
+                        cl  = `echo "${modTitle}, ${modSubtitle}, ${modPayload}" | festival --tts`.replace(/,+/, ','); // every second would be spoken
+
+                        break;
+                    }
+
+                    case 'linuxsay_espeak': {
+                        let modPayload = payload.replace(/"/g, "").replace(/'/g, "");
+                        let modTitle = node.title.replace(/"/g, "").replace(/'/g, "");
+                        let modSubtitle = node.subtitle.replace(/"/g, "").replace(/'/g, "");
+
+                        cl  = `espeak -ven+f3 -k5 -s150 "${modTitle}, ${modSubtitle}, ${modPayload}"`.replace(/,+/, ','); // every second would be spoken
+
+                        break;
+                    }
+
+                    case 'linuxsay_google': {
+                        let modPayload = payload.replace(/"/g, "").replace(/'/g, "");
+                        let modTitle = node.title.replace(/"/g, "").replace(/'/g, "");
+                        let modSubtitle = node.subtitle.replace(/"/g, "").replace(/'/g, "");
+
+                        let msg = `${modTitle}, ${modSubtitle}, ${modPayload}";`.replace(/,+/, ','); // every second would be spoken
+
+                        cl  = `/usr/bin/mplayer -ao alsa -really-quiet -noconsolecontrols "http://translate.google.com/translate_tts?tl=en&q=${complete}";`;
+
+                        break;
+                    }
+
                 }
 
                 ///console.log( require('util').inspect( ['p', this.op1, this.op1type, process.cwd(), __dirname] ) );

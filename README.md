@@ -1,6 +1,6 @@
 # node-red-contrib-sysmessage
 
-This module provides a node for Node-RED to quickly show or speak a message at the host system (OSX, Windows).
+This module provides a node for Node-RED to quickly show or speak a message at the host system (OSX, Windows, Linux).
 
 It is distributed on NPM [node-red-contrib-sysmessage](https://www.npmjs.com/package/node-red-contrib-sysmessage).
 
@@ -47,6 +47,15 @@ It supports OSX and Windows:
 	- Uses WIN own speech synthesis to speak the provided input, using mshta without POWERSHELL (for older windows).
 	- Starts the speach faster.
 	- ! Focus from the current window, is taken on the host, while mshta creates a window + speaks + closes it.
+	- Does not support a receiver.
+- LINUX Say (festival) [use for RaspberryPI]
+	- Needs festival to be installed first.
+	- Does not support a receiver.
+- LINUX Say (espeak) [use for RaspberryPI]
+	- Needs espeak to be installed first.
+	- Does not support a receiver.
+- LINUX Say (google) [use for RaspberryPI]
+	- Needs mplayer to be installed first, requires the google domains to be reachable.
 	- Does not support a receiver.
 
 *Mind:*

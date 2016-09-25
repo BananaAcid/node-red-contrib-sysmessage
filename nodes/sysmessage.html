@@ -1,17 +1,6 @@
 <!--
-  Copyright 2013,2015 IBM Corp.
-
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
-
-  http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
+  Copyright(c) 2016 Nabil Redmann <repo@nabil-redmann.de>
+  MIT Licensed
 -->
 
 <script type="text/x-red" data-template-name="sysmessage">
@@ -27,6 +16,9 @@
             <option value="winnotification">WIN Notification</option>
             <option value="winsay">WIN Say</option>
             <option value="winsay2">WIN Say (mshta)</option>
+            <option value="linuxsay_festival">LINUX Say (festival)</option>
+            <option value="linuxsay_espeak">LINUX Say (espeak)</option>
+            <option value="linuxsay_google">LINUX Say (google)</option>
         </select>
     </div>
 
@@ -109,6 +101,24 @@
                 <li>Uses WIN own speech synthesis to speak the provided input, using mshta without POWERSHELL (for older windows).</li>
                 <li>Starts the speach faster.</li>
                 <li>! Focus from the current window, is taken on the host, while mshta creates a window + speaks + closes it.</li>
+                <li>Does not support a receiver.</li>
+                </ul>
+            </li>
+            <li>LINUX Say (festival) [use for RaspberryPI]
+                <ul>
+                <li>Needs festival to be installed first.</li>
+                <li>Does not support a receiver.</li>
+                </ul>
+            </li>
+            <li>LINUX Say (espeak) [use for RaspberryPI]
+                <ul>
+                <li>Needs espeak to be installed first.</li>
+                <li>Does not support a receiver.</li>
+                </ul>
+            </li>
+            <li>LINUX Say (google) [use for RaspberryPI]
+                <ul>
+                <li>Needs mplayer to be installed first, requires the google domains to be reachable.</li>
                 <li>Does not support a receiver.</li>
                 </ul>
             </li>
