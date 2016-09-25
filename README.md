@@ -12,10 +12,11 @@ No extra binaries needed. None are included in the package.
 
 ## Install
 
-Run the following command in your Node-RED user directory (typically `~/.node-red`):
+Run the following commands to install the node-module in your Node-RED user directory (typically `~/.node-red`):
 
-```
-npm install node-red-contrib-sysmessage
+```bash
+$ cd ~/.node-red
+$ npm install node-red-contrib-sysmessage
 ```
 
 Open your Node-RED instance and you should have the node available in the palette and a new `system` tab in right side panel.
@@ -63,7 +64,8 @@ It supports OSX and Windows:
 	* Except for OSX Message / iMessage, here its the buddy / phonenumber or email.
 2. To show a message on a different OS, send the payload with an TCP OUT server, and receive it there with an TCP IN to pass it into sysmessage.
 3. **For _Remote Apple Events_ to work, you need to enable them at: `System Preferences > Sharing > Remote Apple Events` on the Mac you want execute the events at.**
-4. For _Windows Remote Execution_ you might get a login box to be able to send/receive the commands.  
+4. For _Windows Remote Execution_ you might get a login box to be able to send/receive the commands.
+5. For Linux, you might read how to install the TTS engines: [RPi_Text_to_Speech_(Speech_Synthesis)  ](http://elinux.org/RPi_Text_to_Speech_(Speech_Synthesis))  
 
 
 #### Note
