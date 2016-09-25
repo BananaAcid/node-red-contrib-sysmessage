@@ -18,6 +18,7 @@ Run the following commands to install the node-module in your Node-RED user dire
 $ cd ~/.node-red
 $ npm install node-red-contrib-sysmessage
 ```
+**you might need to use `npm install -g node-red-contrib-sysmessage` if you get an error abotu sysmessage not being able to find "is_uft8"**
 
 Open your Node-RED instance and you should have the node available in the palette and a new `system` tab in right side panel.
 
