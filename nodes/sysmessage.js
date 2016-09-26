@@ -97,7 +97,6 @@ module.exports = function(RED) {
                         break;
                     }
 
-
                     case 'osxsay': {
                         let modPayload = payload.replace(/"/g, "").replace(/'/g, "");
                         let modTitle = node.title.replace(/"/g, "").replace(/'/g, "");
@@ -138,7 +137,7 @@ module.exports = function(RED) {
                         let modPayload = payload.replace(/\\n/g, '\n').replace(/'/g, "`");
                         let c = Buffer.from(`. '${__dirname}\\parts\\_windows-notificationicon.ps1'; Show-BalloonTip -Title '${modTitle}' -Message '${modPayload}';`, 'utf16le').toString('base64');
 
-                        cl = `PowerShell -EncodedCommand ${c}`;
+                        cl = `PowerShell -NoProfile -ExecutionPolicy Bypass -EncodedCommand ${c}`;
                         break;
                     }
 
@@ -148,7 +147,7 @@ module.exports = function(RED) {
                         let modSubtitle = node.subtitle.replace(/"/g, "").replace(/'/g, "");
 
                         let c = Buffer.from(`Add-Type –AssemblyName System.Speech; (New-Object System.Speech.Synthesis.SpeechSynthesizer).Speak('${modTitle}, ${modSubtitle}, ${modPayload}');`.replace(/,+/, ','), 'utf16le').toString('base64');
-                        cl = `PowerShell -EncodedCommand ${c}`;
+                        cl = `PowerShell -NoProfile -ExecutionPolicy Bypass -EncodedCommand ${c}`;
                         break;
                     }
 
