@@ -68,7 +68,6 @@ module.exports = function(RED) {
 
                         cl += `display notification "${modPayload}" with title "${modTitle}" subtitle "${modSubtitle}"`;
                         cl  = `osascript -e '${cl}'`;
-
                         break;
                     }
 
@@ -83,7 +82,6 @@ module.exports = function(RED) {
 
                         cl  = `tell application "System Events" ${cl} to display dialog "${modSubtitle}\\n\\n${modPayload}" with title "${modTitle}" buttons "ok"`;
                         cl  = `osascript -e '${cl}'`;
-
                         break;
                     }
 
@@ -111,7 +109,6 @@ module.exports = function(RED) {
 
                         cl  = `tell application "System Events" ${cl} to say "${modTitle}, ${modSubtitle}, ${modPayload}"`.replace(/,+/, ','); // every second would be spoken
                         cl  = `osascript -e '${cl}'`;
-
                         break;
                     }
 
@@ -126,7 +123,7 @@ module.exports = function(RED) {
                         break;
                     }
 
-                    case 'winalertlocal': {
+                    case 'winalert2': {
                         let modPayload = payload.replace(/"/g, "'").replace(/\\n/g, '""+vbNewLine+""');
                         let modTitle = node.title.replace(/"/g, "'");
                         let modSubtitle = node.subtitle.replace(/\\n/g, ' ').replace(/"/g, "'");
@@ -142,6 +139,7 @@ module.exports = function(RED) {
                         let c = Buffer.from(`. '${__dirname}\\parts\\_windows-notificationicon.ps1'; Show-BalloonTip -Title '${modTitle}' -Message '${modPayload}';`, 'utf16le').toString('base64');
 
                         cl = `PowerShell -EncodedCommand ${c}`;
+                        break;
                     }
 
                     case 'winsay': {
@@ -171,7 +169,6 @@ module.exports = function(RED) {
                         let modSubtitle = node.subtitle.replace(/"/g, "").replace(/'/g, "");
 
                         cl  = `echo "${modTitle}, ${modSubtitle}, ${modPayload}" | festival --tts`.replace(/,+/, ','); // every second would be spoken
-
                         break;
                     }
 
@@ -181,7 +178,6 @@ module.exports = function(RED) {
                         let modSubtitle = node.subtitle.replace(/"/g, "").replace(/'/g, "");
 
                         cl  = `espeak -ven+f3 -k5 -s150 "${modTitle}, ${modSubtitle}, ${modPayload}"`.replace(/,+/, ','); // every second would be spoken
-
                         break;
                     }
 
@@ -193,7 +189,6 @@ module.exports = function(RED) {
                         let msg = `${modTitle}, ${modSubtitle}, ${modPayload}";`.replace(/,+/, ','); // every second would be spoken
 
                         cl  = `/usr/bin/mplayer -ao alsa -really-quiet -noconsolecontrols "http://translate.google.com/translate_tts?tl=en&q=${complete}";`;
-
                         break;
                     }
 

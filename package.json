@@ -1,6 +1,6 @@
 {
     "name": "node-red-contrib-sysmessage",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "author": "Nabil Redmann <repo@bananaacid.de>",
     "description": "A message/alert (osx/win/linux) for Node-RED",
     "keywords": [
