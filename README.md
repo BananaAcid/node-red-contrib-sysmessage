@@ -34,7 +34,7 @@ It supports OSX and Windows:
 - OSX Say
 	- Uses OSX own speech synthesis to speak the provided input.
 - WIN Alert
-	- A basic OS message box (all fields will be parsed in the message area without newlines, but supports a receiver), at least Win 7
+	- A basic OS message box (all fields will be parsed in the message area without newlines, but supports a receiver), at least Win 7x64 (only 64-Bit systems)
 - WIN Alert (mshta)
 	- A basic OS message box (title is shown correctly as well as newlines). At least Win XP.
 	- Does not support a receiver.
